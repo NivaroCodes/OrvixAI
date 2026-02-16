@@ -22,8 +22,6 @@ class UserOut(UserBase):
 class UserResponse(UserBase):
     id: int
     email: str
-    name: Optional[str] = None
-    role: Optional[str] = None
     is_active: bool
 
     class Config:
