@@ -1,6 +1,7 @@
 from database.base import Base
 from enum import Enum
-from sqlalchemy import Column, ForeignKey, String, Integer, DateTime, func, Enum as SQLAlchemyEnum, relationship
+from sqlalchemy import Column, ForeignKey, String, Integer, DateTime, func, Enum as SQLAlchemyEnum
+from sqlalchemy.orm import relationship
 
 class TaskStatus(str, Enum):
     TODO = "todo"
@@ -16,7 +17,7 @@ class Task(Base):
     status = Column(SQLAlchemyEnum(TaskStatus), default=TaskStatus.TODO, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-    user_id = Column(Integer, ForeignKey("user.id"))
+    user_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="tasks")
 

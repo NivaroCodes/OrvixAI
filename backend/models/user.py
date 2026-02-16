@@ -12,8 +12,3 @@ class User(Base):
   password_hash = Column(String(255), nullable=False)
   is_active = Column(Boolean, default=True)
   tasks = relationship("Task", back_populates=("owner"))
-
-
-  
-  
-
